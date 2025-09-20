@@ -798,38 +798,61 @@ const AIAssessment = () => {
             <section className="relative w-full py-20 bg-gradient-to-b from-white to-cyan-100 overflow-hidden">
               <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50">
-                  How It <span className="bg-gradient-primary bg-clip-text text-transparent">Works</span>
+                  How Personalized Assessment <span className="bg-gradient-primary bg-clip-text text-transparent">Works</span>
                 </h2>
-                <div className="grid md:grid-cols-3 gap-8">
-                  <Card className="p-6 text-center border-primary/10">
-                    <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-primary font-bold text-xl">1</span>
+                <div className="relative">
+                  {/* Desktop Flow */}
+                  <div className="hidden lg:block">
+                    <div className="flex items-center justify-between">
+                      {[
+                        { icon: Upload, title: "1. Upload Resume", desc: "Upload your resume and our AI will analyze your skills, experience, and qualifications." },
+                        { icon: Brain, title: "2. AI Analysis", desc: "Our AI extracts your skills, creates a job profile, and identifies your strengths." },
+                        { icon: Target, title: "3. Job Matching", desc: "Get personalized job recommendations that match your skills and career goals." },
+                        { icon: CheckCircle, title: "4. Skill Assessment", desc: "Take targeted assessments to validate your skills and identify areas for improvement." },
+                        { icon: MessageSquare, title: "5. Mock Interview", desc: "Practice with AI-powered mock interviews and get detailed feedback on your performance." }
+                      ].map((step, index) => (
+                        <div key={index} className="flex items-center">
+                          <Card className="p-6 text-center border-primary/10 hover:shadow-lg transition-shadow w-48">
+                            <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <step.icon className="h-6 w-6 text-primary" />
+                            </div>
+                            <h3 className="font-bold text-lg mb-2">{step.title}</h3>
+                            <p className="text-muted-foreground text-sm">
+                              {step.desc}
+                            </p>
+                          </Card>
+                          {index < 4 && (
+                            <div className="flex items-center mx-4">
+                              <ArrowRight className="h-6 w-6 text-primary/60" />
+                            </div>
+                          )}
+                        </div>
+                      ))}
                     </div>
-                    <h3 className="font-bold text-lg mb-2">Choose Your Test</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Select from our range of assessments or interview simulations based on your needs.
-                    </p>
-              </Card>
-                  <Card className="p-6 text-center border-primary/10">
-                    <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-primary font-bold text-xl">2</span>
+                  </div>
+
+                  {/* Mobile/Tablet Grid */}
+                  <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[
+                      { icon: Upload, title: "1. Upload Resume", desc: "Upload your resume and our AI will analyze your skills, experience, and qualifications." },
+                      { icon: Brain, title: "2. AI Analysis", desc: "Our AI extracts your skills, creates a job profile, and identifies your strengths." },
+                      { icon: Target, title: "3. Job Matching", desc: "Get personalized job recommendations that match your skills and career goals." },
+                      { icon: CheckCircle, title: "4. Skill Assessment", desc: "Take targeted assessments to validate your skills and identify areas for improvement." },
+                      { icon: MessageSquare, title: "5. Mock Interview", desc: "Practice with AI-powered mock interviews and get detailed feedback on your performance." }
+                    ].map((step, index) => (
+                      <Card key={index} className="p-6 text-center border-primary/10 hover:shadow-lg transition-shadow">
+                        <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <step.icon className="h-6 w-6 text-primary" />
+                        </div>
+                        <h3 className="font-bold text-lg mb-2">{step.title}</h3>
+                        <p className="text-muted-foreground text-sm">
+                          {step.desc}
+                        </p>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
-                    <h3 className="font-bold text-lg mb-2">Take the Assessment</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Complete the assessment at your own pace with real-time AI monitoring and adaptation.
-                    </p>
-                  </Card>
-                  <Card className="p-6 text-center border-primary/10">
-                    <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-primary font-bold text-xl">3</span>
-                    </div>
-                    <h3 className="font-bold text-lg mb-2">Get Detailed Feedback</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Receive comprehensive analysis and personalized improvement recommendations.
-                    </p>
-                  </Card>
-                </div>
-              </div>
+                  </div>
             </section>
 
           {/* Testimonials Section */}
