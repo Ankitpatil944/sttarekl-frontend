@@ -3,6 +3,7 @@ import { Badge } from "@/components/new_ui/badge";
 import { Button } from "@/components/new_ui/button2";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface TabContent {
   badge: string;
@@ -34,6 +35,29 @@ const Feature108 = ({
   tabs = [],
 }: Feature108Props) => {
   const [activeTab, setActiveTab] = useState(tabs[0]?.value);
+  const navigate = useNavigate();
+
+  const handleButtonClick = (buttonText: string) => {
+    // Scroll to top first
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Small delay to ensure scroll happens before navigation
+    setTimeout(() => {
+      switch (buttonText) {
+        case "Start Demo":
+          navigate('/services/ai-assessment?tab=interview');
+          break;
+        case "See Insights":
+          navigate('/services/ai-assessment?tab=assessment');
+          break;
+        case "Start Quick Test":
+          navigate('/services/ai-assessment?tab=personalized');
+          break;
+        default:
+          navigate('/services/ai-assessment?tab=personalized');
+      }
+    }, 100);
+  };
 
   return (
     <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,7 +132,11 @@ const Feature108 = ({
                     <p className="text-[#b4b4b4] lg:text-lg">
                       {tab.content.description}
                     </p>
-                    <Button className="mt-2.5 w-fit gap-2 mx-auto lg:mx-0" size="lg">
+                    <Button 
+                      className="mt-2.5 w-fit gap-2 mx-auto lg:mx-0" 
+                      size="lg"
+                      onClick={() => handleButtonClick(tab.content.buttonText)}
+                    >
                       {tab.content.buttonText}
                     </Button>
                   </div>

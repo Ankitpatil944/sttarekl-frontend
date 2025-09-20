@@ -17,7 +17,7 @@ import {
   Upload,
   FileText
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 import Footer from "@/components/Footer";
@@ -48,6 +48,11 @@ const AIAssessment = () => {
   const [recommendedJobs, setRecommendedJobs] = useState<any[]>([]);
   const [testCompleted, setTestCompleted] = useState(false);
   const navigate = useNavigate();
+
+  // Scroll to top when component mounts or tab changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeTab, tabParam]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -826,10 +831,10 @@ const AIAssessment = () => {
                               <ArrowRight className="h-6 w-6 text-primary/60" />
                             </div>
                           )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                </div>
+                ))}
+                </div>
+            </div>
 
                   {/* Mobile/Tablet Grid */}
                   <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -843,15 +848,15 @@ const AIAssessment = () => {
                       <Card key={index} className="p-6 text-center border-primary/10 hover:shadow-lg transition-shadow">
                         <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                           <step.icon className="h-6 w-6 text-primary" />
-                        </div>
+          </div>
                         <h3 className="font-bold text-lg mb-2">{step.title}</h3>
                         <p className="text-muted-foreground text-sm">
                           {step.desc}
                         </p>
                       </Card>
-                    ))}
-                  </div>
-                </div>
+                ))}
+              </div>
+                    </div>
                   </div>
             </section>
 
