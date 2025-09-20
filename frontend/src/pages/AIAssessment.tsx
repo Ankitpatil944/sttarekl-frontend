@@ -1,468 +1,437 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, Check, Star, Brain, Target, Zap, Users, Award, Clock, TrendingUp, BookOpen, Lightbulb } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar-menu";
+import { 
+  Bot, 
+  Brain, 
+  Target, 
+  BarChart, 
+  Clock,
+  CheckCircle,
+  Play,
+  Mic,
+  Video,
+  FileText,
+  Users,
+  Star,
+  ArrowRight,
+  Sparkles,
+  Zap,
+  Shield,
+  TrendingUp,
+  MessageSquare,
+  Lightbulb
+} from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from 'framer-motion';
 import Footer from "@/components/Footer";
+import { Navbar } from "@/components/ui/navbar-menu";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
+import './OutlinedText.css';
 
 const AIAssessment = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<{ [key: number]: string }>({});
-  const [showResults, setShowResults] = useState(false);
+  const [activeTab, setActiveTab] = useState<'assessment' | 'interview'>('assessment');
+  const navigate = useNavigate();
 
-  const questions = [
-    {
-      id: 1,
-      question: "What is your primary career goal?",
-      options: [
-        "Land a new job in my field",
-        "Get promoted in my current role",
-        "Switch to a different industry",
-        "Start my own business"
-      ]
-    },
-    {
-      id: 2,
-      question: "How would you rate your current technical skills?",
-      options: [
-        "Beginner - Just starting out",
-        "Intermediate - Some experience",
-        "Advanced - Very experienced",
-        "Expert - Industry leader"
-      ]
-    },
-    {
-      id: 3,
-      question: "What's your biggest career challenge?",
-      options: [
-        "Lack of relevant experience",
-        "Limited networking opportunities",
-        "Outdated skills",
-        "Confidence in interviews"
-      ]
-    }
-  ];
-
-  const features = [
+  const assessmentFeatures = [
     {
       icon: Brain,
-      title: "AI-Powered Analysis",
-      description: "Get personalized insights based on your responses"
+      title: "Adaptive Testing",
+      description: "Questions adjust to your skill level in real-time for accurate assessment"
+    },
+    {
+      icon: BarChart,
+      title: "Detailed Analytics",
+      description: "Comprehensive performance breakdown with skill-specific insights"
     },
     {
       icon: Target,
-      title: "Career Roadmap",
-      description: "Receive a customized path to your goals"
-    },
-    {
-      icon: Zap,
-      title: "Quick Assessment",
-      description: "Complete in just 5 minutes"
-    },
-    {
-      icon: Users,
-      title: "Expert Recommendations",
-      description: "Get advice from industry professionals"
-    }
-  ];
-
-  const benefits = [
-    {
-      icon: Award,
-      title: "Higher Success Rate",
-      description: "3x more likely to achieve career goals"
+      title: "Industry Benchmarking",
+      description: "Compare your performance against industry standards and peers"
     },
     {
       icon: Clock,
-      title: "Save Time",
-      description: "Skip trial and error with guided path"
+      title: "Time Management",
+      description: "Practice under realistic time constraints to improve efficiency"
+    }
+  ];
+
+  const interviewFeatures = [
+    {
+      icon: Video,
+      title: "Video Recording",
+      description: "Record your responses and analyze body language and presentation"
     },
     {
-      icon: TrendingUp,
-      title: "Better Opportunities",
-      description: "Access to exclusive job opportunities"
+      icon: Mic,
+      title: "Voice Analysis",
+      description: "AI analyzes tone, pace, and clarity of your verbal responses"
+    },
+    {
+      icon: MessageSquare,
+      title: "Real-time Feedback",
+      description: "Get instant feedback on your answers and communication style"
+    },
+    {
+      icon: Users,
+      title: "Behavioral Questions",
+      description: "Practice with common behavioral and situational questions"
+    }
+  ];
+
+  const assessmentTypes = [
+    {
+      name: "Technical Skills",
+      description: "Programming, data analysis, design tools",
+      duration: "45-60 min",
+      questions: "30-40",
+      difficulty: "Adaptive"
+    },
+    {
+      name: "Soft Skills",
+      description: "Communication, leadership, problem-solving",
+      duration: "30-45 min",
+      questions: "20-25",
+      difficulty: "Adaptive"
+    },
+    {
+      name: "Domain Knowledge",
+      description: "Industry-specific knowledge and expertise",
+      duration: "60-90 min",
+      questions: "40-50",
+      difficulty: "Adaptive"
+    },
+    {
+      name: "Cognitive Ability",
+      description: "Logical reasoning, analytical thinking",
+      duration: "30-45 min",
+      questions: "25-30",
+      difficulty: "Adaptive"
+    }
+  ];
+
+  const interviewTypes = [
+    {
+      name: "Behavioral Interview",
+      description: "STAR method questions about past experiences",
+      duration: "20-30 min",
+      questions: "5-8",
+      focus: "Experience & Skills"
+    },
+    {
+      name: "Technical Interview",
+      description: "Problem-solving and technical discussion",
+      duration: "30-45 min",
+      questions: "3-5",
+      focus: "Technical Skills"
+    },
+    {
+      name: "Case Study",
+      description: "Real-world scenarios and business problems",
+      duration: "45-60 min",
+      questions: "1-2",
+      focus: "Problem Solving"
+    },
+    {
+      name: "Cultural Fit",
+      description: "Values, work style, and team collaboration",
+      duration: "15-25 min",
+      questions: "4-6",
+      focus: "Personality & Values"
     }
   ];
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Sarah Chen",
       role: "Software Engineer",
       company: "Google",
-      quote: "The AI assessment helped me identify exactly what skills I needed to develop. I got my dream job in 3 months!",
-      improvement: "+300%"
+      quote: "The AI assessment accurately identified my weak areas in system design. The targeted practice helped me improve significantly.",
+      score: "92%",
+      improvement: "+18%"
     },
     {
-      name: "Michael Chen",
-      role: "Marketing Manager",
+      name: "Michael Rodriguez",
+      role: "Product Manager",
+      company: "Microsoft",
+      quote: "The AI interview simulation was incredibly realistic. It helped me practice my responses and build confidence for real interviews.",
+      score: "88%",
+      improvement: "+15%"
+    },
+    {
+      name: "Priya Sharma",
+      role: "Data Scientist",
       company: "Amazon",
-      quote: "The personalized roadmap was a game-changer. I followed it step by step and got promoted twice in one year.",
-      improvement: "+200%"
+      quote: "The detailed feedback on my communication style was eye-opening. I learned to be more concise and impactful in my responses.",
+      score: "95%",
+      improvement: "+22%"
     }
   ];
 
-  const handleAnswer = (answer: string) => {
-    setAnswers({ ...answers, [currentQuestion]: answer });
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setShowResults(true);
-    }
-  };
-
-  const progress = ((currentQuestion + 1) / questions.length) * 100;
-
   return (
-    <div className="min-h-screen bg-[#031527]">
+    <div className="min-h-screen bg-gradient-bg">
       <Navbar />
-      <div className="relative w-full animate-fade-in">
+      <div
+        className="min-h-screen max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 
+                    m-4 sm:m-6 lg:m-10 bg-gradient-bg border border-blue-300 rounded-3xl overflow-hidden bg-gradient-to-b from-slate-100 to-cyan-50
+                    animate-fade-in mt-20"
+        style={{ marginTop: '5rem' }}
+      >
         <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="relative z-40 lg:min-h-screen max-w-screen-2xl mx-auto pt-16 bg-gradient-to-b from-cyan-100 to-white overflow-hidden"
+          className="relative z-40 lg:min-h-screen overflow-hidden"
       >
+          <div className="relative max-w-7xl mx-auto pt-16 lg:pt-20">
         {/* Hero Section */}
-          <div className="relative z-10 px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-            <div className="text-center max-w-4xl mx-auto">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
-              >
-                Discover Your{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  Career Potential
-                </span>{" "}
-                with AI
-              </motion.h1>
-              
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto"
-              >
-                Take our AI-powered assessment to get personalized insights, career recommendations, 
-                and a roadmap to achieve your professional goals.
-              </motion.p>
+        <div className="pt-20 mt-10 pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center space-x-2 bg-card/50 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-primary/20">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium">AI-Powered Evaluation</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-normal mb-6 leading-tight animate-fade-in text-[#2D3253]">
+              AI <span className="bg-gradient-primary bg-clip-text text-transparent">Assessment</span>
+            </h1>
+            <p className="text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in">
+              Evaluate your skills with AI-powered assessments and practice interviews. Get detailed feedback and personalized improvement plans.
+            </p>
+          </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          {/* Tab Navigation */}
+          <div className="flex justify-center mb-12">
+            <div className="bg-card/50 backdrop-blur-sm rounded-lg p-1 border border-primary/20">
+              <button
+                onClick={() => setActiveTab('assessment')}
+                className={`px-6 py-3 rounded-md font-medium transition-all ${
+                  activeTab === 'assessment'
+                    ? 'bg-primary text-primary-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
               >
-                <Button
-                  size="lg"
-                  onClick={() => {
-                    console.log('Start Assessment clicked');
-                    setCurrentQuestion(0);
-                    setShowResults(false);
-                  }}
-                >
-                  Start Assessment
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => {
-                    console.log('Learn More clicked');
-                    // Scroll to features section
-                  }}
-                >
-                  Learn More
-                </Button>
-              </motion.div>
+                <Brain className="h-4 w-4 inline mr-2" />
+                AI Assessment
+              </button>
+              <button
+                    onClick={() => setActiveTab('interview')}
+                className={`px-6 py-3 rounded-md font-medium transition-all ${
+                  activeTab === 'interview'
+                    ? 'bg-primary text-primary-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <Video className="h-4 w-4 inline mr-2" />
+                    AI Interview
+              </button>
             </div>
           </div>
 
           {/* Assessment Section */}
-          {!showResults && (
-            <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-16">
-              <div className="max-w-2xl mx-auto">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                  className="text-center mb-8"
-                >
-                  <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                    Career Assessment
-                  </h2>
-                  <p className="text-xl text-gray-600 mb-6">
-                    Question {currentQuestion + 1} of {questions.length}
-                  </p>
-                  <Progress value={progress} className="w-full max-w-md mx-auto" />
-                </motion.div>
+          {activeTab === 'assessment' && (
+            <div className="space-y-16">
+              {/* Features */}
+              <div>
+                <h2 className="text-3xl font-bold text-center mb-12">Assessment Features</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {assessmentFeatures.map((feature) => (
+                    <Card key={feature.title} className="p-6 text-center border-primary/10">
+                      <feature.icon className="h-12 w-12 mx-auto mb-4 text-primary" />
+                      <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
+                      <p className="text-muted-foreground text-sm">{feature.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
 
-                <motion.div
-                  key={currentQuestion}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Card className="mb-8">
-                    <CardHeader>
-                      <CardTitle className="text-2xl text-center">
-                        {questions[currentQuestion].question}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      {questions[currentQuestion].options.map((option, index) => (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          className="w-full justify-start h-auto p-4 text-left"
-                          onClick={() => handleAnswer(option)}
-                        >
-                          <span className="font-medium">{option}</span>
+              {/* Assessment Types */}
+              <div>
+                <h2 className="text-3xl font-bold text-center mb-12">Assessment Types</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {assessmentTypes.map((type) => (
+                    <Card key={type.name} className="p-6 border-primary/10">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="font-bold text-xl mb-2">{type.name}</h3>
+                          <p className="text-muted-foreground mb-3">{type.description}</p>
+                        </div>
+                        <Badge variant="secondary">{type.difficulty}</Badge>
+                      </div>
+                      <div className="grid grid-cols-3 gap-4 text-sm">
+                        <div>
+                          <p className="text-muted-foreground">Duration</p>
+                          <p className="font-medium">{type.duration}</p>
+                      </div>
+                        <div>
+                          <p className="text-muted-foreground">Questions</p>
+                          <p className="font-medium">{type.questions}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Format</p>
+                          <p className="font-medium">Multiple Choice</p>
+                        </div>
+                      </div>
+                      <Button className="w-full mt-4" onClick={() => navigate('/assessment')}>
+                        Start Assessment
+                        <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                      ))}
-                    </CardContent>
                     </Card>
-                </motion.div>
+                  ))}
+                    </div>
               </div>
             </div>
           )}
 
-          {/* Results Section */}
-          {showResults && (
-            <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-16">
-              <div className="max-w-4xl mx-auto text-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                    Your Career Assessment Results
-                  </h2>
-                  <p className="text-xl text-gray-600 mb-8">
-                    Based on your responses, here's your personalized career roadmap
-                  </p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center justify-center">
-                          <Target className="w-6 h-6 mr-2 text-blue-600" />
-                          Current Level
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-2xl font-bold text-blue-600">Intermediate</p>
-                        <p className="text-gray-600">You have solid foundations</p>
-                      </CardContent>
+          {/* Interview Section */}
+          {activeTab === 'interview' && (
+            <div className="space-y-16">
+              {/* Features */}
+              <div>
+                <h2 className="text-3xl font-bold text-center mb-12">Interview Features</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {interviewFeatures.map((feature) => (
+                    <Card key={feature.title} className="p-6 text-center border-primary/10">
+                      <feature.icon className="h-12 w-12 mx-auto mb-4 text-primary" />
+                      <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
+                      <p className="text-muted-foreground text-sm">{feature.description}</p>
                     </Card>
-                    
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center justify-center">
-                          <TrendingUp className="w-6 h-6 mr-2 text-green-600" />
-                          Growth Potential
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-2xl font-bold text-green-600">High</p>
-                        <p className="text-gray-600">Great opportunities ahead</p>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center justify-center">
-                          <Clock className="w-6 h-6 mr-2 text-purple-600" />
-                          Timeline
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-2xl font-bold text-purple-600">6-12 months</p>
-                        <p className="text-gray-600">To reach next level</p>
-                      </CardContent>
-                    </Card>
+                  ))}
                 </div>
+              </div>
 
-                  <Button
-                    size="lg"
-                    onClick={() => {
-                      console.log('Get Detailed Report clicked');
-                      // Navigate to detailed report
-                    }}
-                  >
-                    Get Detailed Report
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </motion.div>
+              {/* Interview Types */}
+              <div>
+                <h2 className="text-3xl font-bold text-center mb-12">Interview Types</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {interviewTypes.map((type) => (
+                    <Card key={type.name} className="p-6 border-primary/10">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="font-bold text-xl mb-2">{type.name}</h3>
+                          <p className="text-muted-foreground mb-3">{type.description}</p>
+                        </div>
+                        <Badge variant="outline">{type.focus}</Badge>
+                      </div>
+                      <div className="grid grid-cols-3 gap-4 text-sm">
+                        <div>
+                          <p className="text-muted-foreground">Duration</p>
+                          <p className="font-medium">{type.duration}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Questions</p>
+                          <p className="font-medium">{type.questions}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Format</p>
+                          <p className="font-medium">Video/Audio</p>
+                        </div>
+                      </div>
+                      <Button className="w-full mt-4" onClick={() => navigate('/interview')}>
+                        Start Interview
+                        <Play className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Card>
+                  ))}
+                </div>
               </div>
             </div>
           )}
 
-          {/* Features Section */}
-          <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-16 bg-gray-50">
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.0 }}
-                className="text-center mb-12"
-              >
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                  Why Take Our Assessment?
-                </h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  Get personalized insights and recommendations powered by AI
+          {/* How It Works */}
+          <div className="mt-16">
+            <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="p-6 text-center border-primary/10">
+                <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-primary font-bold text-xl">1</span>
+                </div>
+                <h3 className="font-bold text-lg mb-2">Choose Your Test</h3>
+                <p className="text-muted-foreground text-sm">
+                  Select from our range of assessments or interview simulations based on your needs.
                 </p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {features.map((feature, index) => (
-                  <motion.div
-                    key={feature.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 1.2 + index * 0.1 }}
-                  >
-                    <Card className="h-full text-center hover:shadow-lg transition-shadow duration-300">
-                      <CardHeader>
-                        <div className="mx-auto w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                          <feature.icon className="w-6 h-6 text-blue-600" />
-                </div>
-                        <CardTitle className="text-lg">{feature.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <CardDescription className="text-gray-600">
-                          {feature.description}
-                        </CardDescription>
-                      </CardContent>
               </Card>
-                  </motion.div>
-                ))}
+              <Card className="p-6 text-center border-primary/10">
+                <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-primary font-bold text-xl">2</span>
                 </div>
+                <h3 className="font-bold text-lg mb-2">Take the Assessment</h3>
+                <p className="text-muted-foreground text-sm">
+                  Complete the test in a distraction-free environment with our AI monitoring your performance.
+                </p>
+              </Card>
+              <Card className="p-6 text-center border-primary/10">
+                <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-primary font-bold text-xl">3</span>
+                </div>
+                <h3 className="font-bold text-lg mb-2">Get Detailed Feedback</h3>
+                <p className="text-muted-foreground text-sm">
+                  Receive comprehensive analysis with actionable insights and improvement recommendations.
+                </p>
+              </Card>
             </div>
           </div>
 
-          {/* Benefits Section */}
-          <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-16">
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.4 }}
-                className="text-center mb-12"
-              >
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                  Proven Results
-                </h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  Join thousands of professionals who've transformed their careers
-                </p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {benefits.map((benefit, index) => (
-                  <motion.div
-                    key={benefit.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 1.6 + index * 0.1 }}
-                    className="text-center"
-                  >
-                    <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                      <benefit.icon className="w-8 h-8 text-green-600" />
+          {/* Testimonials */}
+          <div className="mt-16">
+            <h2 className="text-3xl font-bold text-center mb-12">Success Stories</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {testimonials.map((testimonial, index) => (
+                <Card key={index} className="p-6 border-primary/10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center">
+                      <span className="text-primary font-bold text-sm">
+                        {testimonial.name.split(' ').map(n => n[0]).join('')}
+                      </span>
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{benefit.title}</h3>
-                    <p className="text-gray-600">{benefit.description}</p>
-                  </motion.div>
-                ))}
-              </div>
+                    <div>
+                      <p className="font-medium">{testimonial.name}</p>
+                      <p className="text-xs text-muted-foreground">{testimonial.role} at {testimonial.company}</p>
                     </div>
                   </div>
-
-          {/* Testimonials Section */}
-          <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-16 bg-gray-50">
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.8 }}
-                className="text-center mb-12"
-              >
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                  Success Stories
-                </h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  See how our users have transformed their careers
-                </p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {testimonials.map((testimonial, index) => (
-                  <motion.div
-                    key={testimonial.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 2.0 + index * 0.1 }}
-                  >
-                    <Card className="h-full">
-                      <CardHeader>
+                  <p className="text-muted-foreground mb-4 italic">"{testimonial.quote}"</p>
                   <div className="flex items-center justify-between">
-                          <div>
-                            <CardTitle className="text-lg">{testimonial.name}</CardTitle>
-                            <CardDescription>
-                              {testimonial.role} at {testimonial.company}
-                            </CardDescription>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-muted-foreground">Score:</span>
+                      <span className="font-bold text-primary">{testimonial.score}</span>
                     </div>
-                          <Badge className="bg-green-600">
-                            {testimonial.improvement}
-                          </Badge>
+                    <div className="flex items-center gap-2">
+                      <TrendingUp className="h-4 w-4 text-green-500" />
+                      <span className="text-sm text-green-500 font-medium">{testimonial.improvement}</span>
                     </div>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-gray-600 italic">"{testimonial.quote}"</p>
-                      </CardContent>
+                  </div>
                 </Card>
-                  </motion.div>
               ))}
-              </div>
             </div>
           </div>
 
           {/* CTA Section */}
-          <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-16">
-            <div className="max-w-4xl mx-auto text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2.2 }}
-              >
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                  Ready to Discover Your Career Potential?
-                </h2>
-                <p className="text-xl text-gray-600 mb-8">
-                  Take our AI-powered assessment and get your personalized career roadmap
-                </p>
-                <Button
-                  size="lg"
-                  onClick={() => {
-                    console.log('Start Assessment clicked');
-                    setCurrentQuestion(0);
-                    setShowResults(false);
-                  }}
-                >
-                  Start Assessment Now
+          <div className="mt-16 text-center">
+            <Card className="p-8 bg-gradient-card border-primary/10">
+              <h3 className="text-2xl font-bold mb-3">Ready to Test Your Skills?</h3>
+              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                Start with a free assessment or interview simulation and see how AI can help you improve.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" onClick={() => navigate('/assessment')}>
+                  Start Free Assessment
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-              </motion.div>
-            </div>
+                <Button variant="outline" size="lg" onClick={() => navigate('/interview')}>
+                  Try AI Interview
+                  <Video className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
           </div>
         </motion.section>
-              </div>
+      </div>
 
       {/* Footer Section */}
       <div
