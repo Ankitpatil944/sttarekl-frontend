@@ -155,7 +155,7 @@ return (
                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
                   onClick={() => {
                     console.log('Get Started clicked');
-                    navigate('/services/ai-assessment');
+                    navigate('/services/ai-assessment?tab=personalized');
                   }}
                 >
                   Get Started
@@ -255,7 +255,7 @@ return (
           <div className="flex justify-center mt-8">
             <Button 
               size="lg" 
-              onClick={() => navigate('/services/ai-assessment')}
+              onClick={() => navigate('/services/ai-assessment?tab=personalized')}
               className="px-8 py-3 text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900"
             >
               Start Demo

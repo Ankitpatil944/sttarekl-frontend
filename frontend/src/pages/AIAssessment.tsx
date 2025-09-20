@@ -24,12 +24,29 @@ import Footer from "@/components/Footer";
 import { Navbar } from "@/components/ui/navbar-menu";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import './OutlinedText.css';
+import { useSearchParams } from 'react-router-dom';
 
 const AIAssessment = () => {
-  const [activeTab, setActiveTab] = useState<'assessment' | 'interview' | 'resume'>('assessment');
+  const [searchParams] = useSearchParams();
+  const tabParam = searchParams.get('tab');
+  
+  // Set initial tab based on URL parameter
+  const getInitialTab = (): 'personalized' | 'assessment' | 'interview' => {
+    if (tabParam === 'personalized') return 'personalized';
+    if (tabParam === 'assessment') return 'assessment';
+    if (tabParam === 'interview') return 'interview';
+    return 'personalized'; // Default to personalized
+  };
+
+  const [activeTab, setActiveTab] = useState<'personalized' | 'assessment' | 'interview'>(getInitialTab());
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [showSampleQuestions, setShowSampleQuestions] = useState(false);
+  const [resumeWorkflowStep, setResumeWorkflowStep] = useState<'upload' | 'analysis' | 'jobs' | 'test' | 'interview'>('upload');
+  const [extractedSkills, setExtractedSkills] = useState<string[]>([]);
+  const [jobDescription, setJobDescription] = useState<string>('');
+  const [recommendedJobs, setRecommendedJobs] = useState<any[]>([]);
+  const [testCompleted, setTestCompleted] = useState(false);
   const navigate = useNavigate();
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,17 +54,82 @@ const AIAssessment = () => {
     if (file) {
       setUploadedFile(file);
       setIsUploading(true);
-      // Simulate upload process
+      // Simulate upload and analysis process
       setTimeout(() => {
         setIsUploading(false);
         console.log('Resume uploaded for assessment:', file.name);
-        // Here you would typically send the file to your backend for analysis
-      }, 2000);
+        
+        // Simulate extracted skills and job description
+        setExtractedSkills([
+          'JavaScript', 'React', 'Node.js', 'Python', 'SQL', 'Git', 'AWS', 'Docker',
+          'Problem Solving', 'Team Leadership', 'Project Management', 'Communication'
+        ]);
+        
+        setJobDescription(`
+          Based on your resume analysis, we've identified you as a Full-Stack Developer with strong technical skills in modern web technologies. 
+          Your experience shows expertise in JavaScript frameworks, backend development, and cloud technologies. 
+          You demonstrate leadership qualities and excellent problem-solving abilities.
+        `);
+        
+        // Simulate recommended jobs
+        setRecommendedJobs([
+    {
+      id: 1,
+            title: 'Senior Full-Stack Developer',
+            company: 'TechCorp Inc.',
+            location: 'San Francisco, CA',
+            salary: '$120k - $150k',
+            match: '95%',
+            skills: ['JavaScript', 'React', 'Node.js', 'AWS'],
+            description: 'Lead development of scalable web applications using modern technologies.'
+          },
+          {
+            id: 2,
+            title: 'Frontend Developer',
+            company: 'StartupXYZ',
+            location: 'Remote',
+            salary: '$90k - $110k',
+            match: '88%',
+            skills: ['React', 'JavaScript', 'Git', 'Problem Solving'],
+            description: 'Build user-friendly interfaces and collaborate with design teams.'
+          },
+          {
+            id: 3,
+            title: 'Software Engineer',
+            company: 'BigTech Solutions',
+            location: 'New York, NY',
+            salary: '$100k - $130k',
+            match: '92%',
+            skills: ['Python', 'SQL', 'Docker', 'Team Leadership'],
+            description: 'Develop backend systems and mentor junior developers.'
+          }
+        ]);
+        
+        // Move to analysis step
+        setResumeWorkflowStep('analysis');
+      }, 3000);
     }
   };
 
   const toggleSampleQuestions = () => {
     setShowSampleQuestions(!showSampleQuestions);
+  };
+
+  const proceedToJobs = () => {
+    setResumeWorkflowStep('jobs');
+  };
+
+  const startAssessment = () => {
+    setResumeWorkflowStep('test');
+  };
+
+  const completeAssessment = () => {
+    setTestCompleted(true);
+    setResumeWorkflowStep('interview');
+  };
+
+  const startInterview = () => {
+    navigate('/interview');
   };
 
   const sampleQuestions = [
@@ -152,23 +234,23 @@ const AIAssessment = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
           className="relative z-40 lg:min-h-screen max-w-screen-2xl mx-auto pt-8 bg-gradient-to-b from-cyan-100 to-white overflow-hidden"
-        >
+      >
           <div className="relative max-w-7xl mx-auto pt-8 lg:pt-12">
         
-            {/* Hero Section */}
+        {/* Hero Section */}
             <section className="relative pt-8 mt-4 pb-12">
               <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div 
+              <motion.div
                   className="text-center max-w-4xl mx-auto"
                   initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
                 >
                   <div className="inline-flex items-center space-x-2 bg-card/50 backdrop-blur-sm rounded-full px-4 py-2 mb-8 border border-primary/20 animate-fade-in">
                     <Sparkles className="h-4 w-4 text-primary animate-pulse" />
                     <span className="text-sm font-medium">AI-Powered Evaluation</span>
-                  </div>
-                  
+          </div>
+
                   <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-normal mb-6 leading-tight animate-fade-in text-[#2D3253]">
                     AI <span className="bg-gradient-primary bg-clip-text text-transparent">Assessment</span>
                   </h1>
@@ -183,6 +265,17 @@ const AIAssessment = () => {
             {/* Tab Navigation */}
             <div className="flex justify-center mb-12">
               <div className="bg-card/50 backdrop-blur-sm rounded-lg p-1 border border-primary/20">
+                <button
+                  onClick={() => setActiveTab('personalized')}
+                  className={`px-6 py-3 rounded-md font-medium transition-all ${
+                    activeTab === 'personalized'
+                      ? 'bg-primary text-primary-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <FileText className="h-4 w-4 inline mr-2" />
+                  Personalized Assessment
+                </button>
                 <button
                   onClick={() => setActiveTab('assessment')}
                   className={`px-6 py-3 rounded-md font-medium transition-all ${
@@ -205,17 +298,6 @@ const AIAssessment = () => {
                   <MessageSquare className="h-4 w-4 inline mr-2" />
                   Mock Interview
                 </button>
-                <button
-                  onClick={() => setActiveTab('resume')}
-                  className={`px-6 py-3 rounded-md font-medium transition-all ${
-                    activeTab === 'resume'
-                      ? 'bg-primary text-primary-foreground shadow-sm'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  <FileText className="h-4 w-4 inline mr-2" />
-                  Resume Assessment
-                </button>
               </div>
             </div>
 
@@ -230,13 +312,13 @@ const AIAssessment = () => {
                     Select from our comprehensive assessment types to evaluate your skills and get personalized feedback.
                   </p>
                 </div>
-                
+
                 <div className="grid md:grid-cols-2 gap-6">
                   {assessmentTypes.map((type) => (
-                    <motion.div
+                  <motion.div
                       key={type.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6 }}
                       whileHover={{ scale: 1.02 }}
                     >
@@ -273,8 +355,8 @@ const AIAssessment = () => {
                           Get Started
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
-                      </Card>
-                    </motion.div>
+                    </Card>
+                  </motion.div>
                   ))}
                 </div>
               </div>
@@ -316,9 +398,9 @@ const AIAssessment = () => {
             {/* Sample Questions Section */}
             {activeTab === 'interview' && showSampleQuestions && (
               <div className="max-w-4xl mx-auto mb-16">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
                 >
@@ -364,8 +446,8 @@ const AIAssessment = () => {
                           Start Mock Interview
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           size="lg" 
                           onClick={toggleSampleQuestions}
                         >
@@ -378,31 +460,56 @@ const AIAssessment = () => {
               </div>
             )}
 
-            {/* Resume-Based Assessment */}
-            {activeTab === 'resume' && (
-              <div className="max-w-4xl mx-auto mb-16">
+            {/* Personalized Assessment Workflow */}
+            {activeTab === 'personalized' && (
+              <div className="max-w-6xl mx-auto mb-16">
                 <div className="text-center mb-12">
                   <h2 className="text-3xl font-bold mb-4 text-[#2D3253]">
-                    Personalized <span className="bg-gradient-primary bg-clip-text text-transparent">Resume Assessment</span>
+                    <span className="bg-gradient-primary bg-clip-text text-transparent">Personalized Assessment</span>
                   </h2>
                   <p className="text-muted-foreground max-w-2xl mx-auto">
                     Upload your resume and get a comprehensive AI-powered assessment tailored to your experience and skills.
                   </p>
                 </div>
-                
-                <Card className="p-8">
-                  <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                      <FileText className="h-8 w-8 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">AI Resume Analysis</h3>
-                    <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                      Our AI will analyze your resume and create a personalized assessment based on your background, skills, and experience level.
-                    </p>
-                  </div>
 
-                  {/* Upload Section */}
-                  <div className="mb-8">
+                {/* Workflow Progress Indicator */}
+                <div className="flex justify-center mb-8">
+                  <div className="flex items-center space-x-4">
+                    {['upload', 'analysis', 'jobs', 'test', 'interview'].map((step, index) => (
+                      <div key={step} className="flex items-center">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                          resumeWorkflowStep === step 
+                            ? 'bg-primary text-white' 
+                            : ['upload', 'analysis', 'jobs', 'test', 'interview'].indexOf(resumeWorkflowStep) > index
+                            ? 'bg-green-500 text-white'
+                            : 'bg-gray-200 text-gray-600'
+                        }`}>
+                          {index + 1}
+                        </div>
+                        <span className={`ml-2 text-sm font-medium ${
+                          resumeWorkflowStep === step ? 'text-primary' : 'text-gray-600'
+                        }`}>
+                          {step.charAt(0).toUpperCase() + step.slice(1)}
+                        </span>
+                        {index < 4 && <div className="w-8 h-0.5 bg-gray-200 mx-2" />}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Step 1: Resume Upload */}
+                {resumeWorkflowStep === 'upload' && (
+                  <Card className="p-8">
+                    <div className="text-center mb-8">
+                      <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <FileText className="h-8 w-8 text-primary" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-4">Upload Your Resume</h3>
+                      <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                        Upload your resume to get started with our AI-powered analysis and personalized job recommendations.
+                      </p>
+                    </div>
+
                     <div className="border-2 border-dashed border-primary/20 rounded-lg p-8 text-center hover:border-primary/40 transition-colors">
                       <div className="flex flex-col items-center gap-4">
                         <div className="relative">
@@ -443,75 +550,249 @@ const AIAssessment = () => {
                         Supported formats: PDF, DOC, DOCX (Max 10MB)
                       </div>
                     </div>
-                  </div>
+                  </Card>
+                )}
 
-                  {/* Assessment Features */}
-                  <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    <div className="space-y-4">
-                      <h4 className="font-semibold text-lg mb-3">What You'll Get:</h4>
-                      <div className="space-y-3">
-                        <div className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">Personalized skill assessment based on your resume</span>
+                {/* Step 2: Skills & Job Description Analysis */}
+                {resumeWorkflowStep === 'analysis' && (
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <Card className="p-6">
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                        <Target className="h-5 w-5 text-primary" />
+                        Extracted Skills
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {extractedSkills.map((skill, index) => (
+                          <Badge key={index} variant="secondary" className="px-3 py-1">
+                            {skill}
+                          </Badge>
+                        ))}
+                      </div>
+                    </Card>
+
+                    <Card className="p-6">
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                        <FileText className="h-5 w-5 text-primary" />
+                        Job Profile Analysis
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {jobDescription}
+                      </p>
+                    </Card>
+                  </div>
+                )}
+
+                {/* Step 3: Recommended Jobs */}
+                {resumeWorkflowStep === 'jobs' && (
+                  <div className="space-y-6">
+                          <div className="text-center">
+                      <h3 className="text-2xl font-bold mb-4">Recommended Jobs for You</h3>
+                      <p className="text-muted-foreground">Based on your skills and experience</p>
+                    </div>
+                    
+                    <div className="grid gap-6">
+                      {recommendedJobs.map((job) => (
+                        <Card key={job.id} className="p-6 hover:shadow-lg transition-shadow">
+                          <div className="flex justify-between items-start mb-4">
+                            <div>
+                              <h4 className="text-xl font-bold text-[#2D3253]">{job.title}</h4>
+                              <p className="text-muted-foreground">{job.company} • {job.location}</p>
+                            </div>
+                            <div className="text-right">
+                              <Badge className="bg-green-100 text-green-800 mb-2">
+                                {job.match} Match
+                              </Badge>
+                              <p className="text-sm font-medium text-[#2D3253]">{job.salary}</p>
+                            </div>
+                          </div>
+                          
+                          <p className="text-muted-foreground mb-4">{job.description}</p>
+                          
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {job.skills.map((skill: string, index: number) => (
+                              <Badge key={index} variant="outline" className="text-xs">
+                                {skill}
+                              </Badge>
+                            ))}
+                          </div>
+                          
+                          <Button 
+                            onClick={startAssessment}
+                            className="w-full"
+                          >
+                            Give Test for This Role
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 4: Assessment Test */}
+                {resumeWorkflowStep === 'test' && (
+                  <Card className="p-8">
+                    <div className="text-center mb-8">
+                      <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <Brain className="h-8 w-8 text-primary" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-4">Skills Assessment</h3>
+                      <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                        Complete this assessment to validate your skills and get personalized feedback.
+                      </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6 mb-8">
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-lg mb-3">Assessment Details:</h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-3">
+                            <Clock className="h-5 w-5 text-primary" />
+                            <span className="text-sm">30-45 minutes total</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <Users className="h-5 w-5 text-primary" />
+                            <span className="text-sm">15-20 tailored questions</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <Target className="h-5 w-5 text-primary" />
+                            <span className="text-sm">Based on your resume skills</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <Zap className="h-5 w-5 text-primary" />
+                            <span className="text-sm">AI-optimized difficulty</span>
+                          </div>
                         </div>
-                        <div className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">Industry-specific competency evaluation</span>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">Experience level-appropriate questions</span>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">Detailed feedback and improvement suggestions</span>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-lg mb-3">What You'll Get:</h4>
+                        <div className="space-y-3">
+                          <div className="flex items-start gap-3">
+                            <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-sm">Detailed skill evaluation</span>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-sm">Personalized feedback</span>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-sm">Improvement suggestions</span>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-sm">Interview preparation</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="space-y-4">
-                      <h4 className="font-semibold text-lg mb-3">Assessment Duration:</h4>
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3">
-                          <Clock className="h-5 w-5 text-primary" />
-                          <span className="text-sm">30-45 minutes total</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Users className="h-5 w-5 text-primary" />
-                          <span className="text-sm">8-15 tailored questions</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Target className="h-5 w-5 text-primary" />
-                          <span className="text-sm">Based on your experience level</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Zap className="h-5 w-5 text-primary" />
-                          <span className="text-sm">AI-optimized difficulty</span>
+                    <div className="text-center">
+                      <Button
+                        size="lg" 
+                        onClick={completeAssessment}
+                        className="px-8 py-3"
+                      >
+                        Start Assessment
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
+                  </Card>
+                )}
+
+                {/* Step 5: Interview */}
+                {resumeWorkflowStep === 'interview' && (
+                  <Card className="p-8">
+                    <div className="text-center mb-8">
+                      <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <MessageSquare className="h-8 w-8 text-primary" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-4">Ready for Interview?</h3>
+                      <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                        {testCompleted 
+                          ? "Great! You've completed the assessment. Now let's practice with a mock interview."
+                          : "Complete the assessment first to proceed to the interview stage."
+                        }
+                      </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6 mb-8">
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-lg mb-3">Mock Interview Features:</h4>
+                        <div className="space-y-3">
+                          <div className="flex items-start gap-3">
+                            <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-sm">AI-powered interview simulation</span>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-sm">Real-time feedback</span>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-sm">Performance analytics</span>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-sm">Improvement recommendations</span>
+                          </div>
+              </div>
+            </div>
+                      
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-lg mb-3">Interview Duration:</h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-3">
+                            <Clock className="h-5 w-5 text-primary" />
+                            <span className="text-sm">20-30 minutes</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <Users className="h-5 w-5 text-primary" />
+                            <span className="text-sm">8-12 questions</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <Target className="h-5 w-5 text-primary" />
+                            <span className="text-sm">Role-specific questions</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <Zap className="h-5 w-5 text-primary" />
+                            <span className="text-sm">Adaptive difficulty</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                </div>
 
-                  {/* Get Started Button */}
-                  <div className="text-center">
-                    <Button 
-                      size="lg" 
-                      disabled={!uploadedFile || isUploading}
-                      onClick={() => navigate('/assessment')}
-                      className="px-8 py-3"
-                    >
-                      Start Personalized Assessment
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                    {!uploadedFile && (
-                      <p className="text-sm text-muted-foreground mt-2">
-                        Please upload your resume to start the assessment
-                      </p>
-                    )}
-                  </div>
-                </Card>
+                    <div className="text-center">
+                  <Button
+                    size="lg"
+                        onClick={startInterview}
+                        disabled={!testCompleted}
+                        className="px-8 py-3"
+                      >
+                        Start Mock Interview
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                      {!testCompleted && (
+                        <p className="text-sm text-muted-foreground mt-2">
+                          Complete the assessment first to unlock the interview
+                        </p>
+                      )}
+                    </div>
+                  </Card>
+                )}
+
+                {/* Navigation Buttons */}
+                {resumeWorkflowStep === 'analysis' && (
+                  <div className="text-center mt-8">
+                    <Button onClick={proceedToJobs} size="lg">
+                      View Recommended Jobs
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
               </div>
-            )}
+                )}
+            </div>
+          )}
 
             {/* How It Works Section */}
             <section className="relative w-full py-20 bg-gradient-to-b from-white to-cyan-100 overflow-hidden">
@@ -528,11 +809,11 @@ const AIAssessment = () => {
                     <p className="text-muted-foreground text-sm">
                       Select from our range of assessments or interview simulations based on your needs.
                     </p>
-                  </Card>
+              </Card>
                   <Card className="p-6 text-center border-primary/10">
                     <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <span className="text-primary font-bold text-xl">2</span>
-                    </div>
+                </div>
                     <h3 className="font-bold text-lg mb-2">Take the Assessment</h3>
                     <p className="text-muted-foreground text-sm">
                       Complete the assessment at your own pace with real-time AI monitoring and adaptation.
@@ -551,18 +832,18 @@ const AIAssessment = () => {
               </div>
             </section>
 
-            {/* Testimonials Section */}
+          {/* Testimonials Section */}
             <section className="relative w-full py-20 bg-gradient-to-b from-cyan-100 to-white overflow-hidden">
               <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50">
                   Success <span className="bg-gradient-primary bg-clip-text text-transparent">Stories</span>
                 </h2>
                 <div className="grid md:grid-cols-3 gap-6">
-                  {testimonials.map((testimonial, index) => (
-                    <motion.div
+                {testimonials.map((testimonial, index) => (
+                  <motion.div
                       key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                     >
                       <Card className="p-6 text-center border-primary/10">
@@ -583,18 +864,18 @@ const AIAssessment = () => {
                           </div>
                           <div className="flex items-center gap-2">
                             <span className="text-sm text-green-500 font-medium">{testimonial.improvement}</span>
-                          </div>
-                        </div>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </div>
+                    </div>
+                    </div>
+                </Card>
+                  </motion.div>
+              ))}
               </div>
+            </div>
             </section>
 
           </div>
         </motion.section>
-      </div>
+              </div>
 
       {/* Footer Section */}
       <div
@@ -606,9 +887,9 @@ const AIAssessment = () => {
             <TextHoverEffect text=" AInode " />
           </div>
         </div>
-      </div>
     </div>
+  </div>
   );
 };
 
-export default AIAssessment;
+export default AIAssessment; 
