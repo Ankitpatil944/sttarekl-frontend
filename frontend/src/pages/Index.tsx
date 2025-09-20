@@ -150,8 +150,7 @@ return (
 
             <div className="flex gap-4 justify-center relative mb-24 lg:mb-0">
               <div>
-                <a
-                  href="#"
+                <button
                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
                   onClick={() => {
                     console.log('Get Started clicked');
@@ -175,7 +174,7 @@ return (
                     <path d="M5 12h14" />
                     <path d="m12 5 7 7-7 7" />
                   </svg>
-                </a>
+                </button>
               </div>
               <div
                 className="inline-flex items-center justify-center px-8 py-3 pl-6 pr-6 text-xs lg:text-lg border border-gray-600 border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-2xl font-medium transition-colors cursor-pointer hover:scale-105"
