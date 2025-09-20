@@ -151,9 +151,12 @@ return (
             <div className="flex gap-4 justify-center relative mb-24 lg:mb-0">
               <div>
                 <button
+                  type="button"
                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
-                  onClick={() => {
-                    console.log('Get Started clicked');
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Get Started clicked - Hero Section');
                     navigate('/services/ai-assessment?tab=personalized');
                   }}
                 >
@@ -253,8 +256,14 @@ return (
           {/* Start Demo Button */}
           <div className="flex justify-center mt-8">
             <Button 
+              type="button"
               size="lg" 
-              onClick={() => navigate('/services/ai-assessment?tab=personalized')}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Start Demo clicked');
+                navigate('/services/ai-assessment?tab=personalized');
+              }}
               className="px-8 py-3 text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900"
             >
               Start Demo
@@ -309,7 +318,7 @@ return (
         className="min-h max-w-screen-2xl mx-auto pb-28 bg-gradient-to-t from-[#D2FAFE] to-[#FFFFFF] overflow-hidden "
       >
         <div className="text-center relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mt-12">
+            <div className="mt-12">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -340,11 +349,11 @@ return (
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
                     <span className="text-primary font-bold text-lg">AR</span>
-                  </div>
+            </div>
                   <div>
                     <h4 className="font-semibold text-lg">Aarav Sharma</h4>
                     <p className="text-muted-foreground text-sm">Software Engineer, Bengaluru</p>
-                  </div>
+        </div>
                 </div>
                 <p className="text-gray-700 italic">
                   "The AI assessments felt practical and the feedback was specific. I landed two interviews in a week after using the platform."
