@@ -205,7 +205,7 @@ const AIAssessment = () => {
                 AI Assessment
               </button>
               <button
-                onClick={() => setActiveTab('interview')}
+                    onClick={() => setActiveTab('interview')}
                 className={`px-6 py-3 rounded-md font-medium transition-all ${
                   activeTab === 'interview'
                     ? 'bg-primary text-primary-foreground shadow-sm'
@@ -213,7 +213,7 @@ const AIAssessment = () => {
                 }`}
               >
                 <Video className="h-4 w-4 inline mr-2" />
-                AI Interview
+                    AI Interview
               </button>
             </div>
           </div>
@@ -252,7 +252,7 @@ const AIAssessment = () => {
                         <div>
                           <p className="text-muted-foreground">Duration</p>
                           <p className="font-medium">{type.duration}</p>
-                        </div>
+                      </div>
                         <div>
                           <p className="text-muted-foreground">Questions</p>
                           <p className="font-medium">{type.questions}</p>
@@ -268,7 +268,7 @@ const AIAssessment = () => {
                       </Button>
                     </Card>
                   ))}
-                </div>
+                    </div>
               </div>
             </div>
           )}
@@ -335,7 +335,7 @@ const AIAssessment = () => {
           <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50">
               How It <span className="bg-gradient-primary bg-clip-text text-transparent">Works</span>
-            </h2>
+                </h2>
             <div className="grid md:grid-cols-3 gap-8">
               <Card className="p-6 text-center border-primary/10">
                 <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -374,7 +374,7 @@ const AIAssessment = () => {
           <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50">
               Success <span className="bg-gradient-primary bg-clip-text text-transparent">Stories</span>
-            </h2>
+                </h2>
             <div className="grid md:grid-cols-3 gap-6">
               {testimonials.map((testimonial, index) => (
                 <Card key={index} className="p-6 border-primary/10">
@@ -408,8 +408,8 @@ const AIAssessment = () => {
 
         {/* Footer */}
         <Footer />
-      </div>
     </div>
+  </div>
   );
 };
 

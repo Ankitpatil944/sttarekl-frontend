@@ -10,8 +10,6 @@ import {
   CheckCircle, 
   ArrowRight,
   Sparkles,
-  Zap,
-  Trophy,
   FileUp,
   ClipboardCheck,
   Bot,
@@ -43,31 +41,6 @@ const Footer = () => {
 
   return (
     <footer className="bg-white rounded-3xl sm:mt-8 lg:mt-9 mb-8">
-      {/* CTA Section */}
-      <div>
-        <section className="bg-white border-t border-gray-200 border-opacity-60 rounded-[60px] mt-4 m-2 py-8 bg-gradient-primary relative overflow-hidden animate-fade-in">
-          <div className="absolute inset-0 bg-black/20" />
-          <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <Trophy className="h-16 w-16 text-white mx-auto mb-6 animate-pulse" />
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 animate-scale-in">
-              Ready to Get Started?
-            </h2>
-            <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto animate-fade-in">
-              Take the first step towards your professional goals with our comprehensive assessment platform
-            </p>
-            <Link to="/services/ai-assessment">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="bg-white text-primary hover:bg-white/90 border-white hover-scale animate-fade-in"
-              >
-                <Zap className="mr-2 h-5 w-5" />
-                Begin Assessment
-              </Button>
-            </Link>
-          </div>
-        </section>
-      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Contact */}

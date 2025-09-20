@@ -103,25 +103,20 @@ const Services = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-bg">
+    <div className="min-h-screen bg-[#031527]">
       <Navbar />
-      <div
-        className="min-h-screen max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 
-                    m-4 sm:m-6 lg:m-10 bg-gradient-bg border border-blue-300 rounded-3xl overflow-hidden bg-gradient-to-b from-slate-100 to-cyan-50
-                    animate-fade-in mt-20"
-        style={{ marginTop: '5rem' }}
-      >
+      <div className="relative w-full animate-fade-in">
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="relative z-40 lg:min-h-screen overflow-hidden"
+          className="relative z-40 lg:min-h-screen max-w-screen-2xl mx-auto flex items-center bg-gradient-to-b from-cyan-100 to-white overflow-hidden"
         >
-          <div className="relative max-w-7xl mx-auto pt-16 lg:pt-20">
+          <div className="relative max-w-7xl mx-auto w-full">
         
         {/* Hero Section */}
-        <section className="relative pt-20 mt-10 pb-20">
+        <section className="relative py-20">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               className="text-center max-w-4xl mx-auto"
@@ -319,9 +314,7 @@ const Services = () => {
       <div
         className="-mt-16 relative z-10 min-h-screen max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-8 border border-blue-300 rounded-tl-[70px] rounded-tr-[70px] overflow-hidden bg-[#FFFFFF] animate-fade-in"
       >
-        {/* Footer */}
         <Footer />
-
         <div className="px-4 sm:px-6 lg:px-8 text-center">
           <div className="h-[16rem] flex items-center justify-center tracking-widest">
             <TextHoverEffect text=" AInode " />
