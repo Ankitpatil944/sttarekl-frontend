@@ -329,7 +329,6 @@ const JobListing = () => {
           </div>
         </div>
       </motion.section>
-    </div>
 
     {/* Footer Section */}
     <div
