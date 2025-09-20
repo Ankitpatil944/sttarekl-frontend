@@ -99,18 +99,11 @@ export const Menu = ({
             rel="noopener noreferrer"
             className="text-sm font-medium transition-colors duration-200 text-muted-foreground hover:text-foreground"
           >
-            <div className="inline-flex items-center justify-center px-5 py-2 border border-gray-600 border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-2xl font-medium transition-colors cursor-pointer hover:scale-105 anim duration-800"
-        // onClick={() => navigate("/about")}
-              >
+            <div className="inline-flex items-center justify-center px-5 py-2 border border-gray-600 border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-2xl font-medium transition-colors cursor-pointer hover:scale-105 anim duration-800">
             Sign In
-        </div>
+            </div>
           </a>
         </div>
-        {/* <div className="inline-flex items-center justify-center px-5 py-2 border border-gray-600 border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-2xl font-medium transition-colors cursor-pointer hover:scale-105 anim duration-800"
-        // onClick={() => navigate("/about")}
-              >
-            Sign In
-        </div> */}
 
         {/* Mobile Hamburger */}
         <button
@@ -131,9 +124,7 @@ export const Menu = ({
             rel="noopener noreferrer"
             className="block text-sm font-medium transition-colors duration-200 text-muted-foreground hover:text-foreground"
           >
-            <div className="inline-flex items-center justify-center px-5 py-2 border border-gray-600 border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-2xl font-medium transition-colors cursor-pointer hover:scale-105 anim duration-800"
-            // onClick={() => navigate("/about")}
-            >
+            <div className="inline-flex items-center justify-center px-5 py-2 border border-gray-600 border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-2xl font-medium transition-colors cursor-pointer hover:scale-105 anim duration-800">
                 Sign In
             </div>
           </a>
@@ -155,7 +146,7 @@ export const ProductItem = ({
   src: string;
 }) => {
   return (
-    <a href={href} className="flex flex-col space-y-3 hover:bg-gray-50 dark:hover:bg-gray-800 p-3 rounded-lg transition-colors">
+    <Link to={href} className="flex flex-col space-y-3 hover:bg-gray-50 dark:hover:bg-gray-800 p-3 rounded-lg transition-colors">
       <img
         src={src}
         width={80}
@@ -171,18 +162,18 @@ export const ProductItem = ({
           {description}
         </p>
       </div>
-    </a>
+    </Link>
   );
 };
 
 export const HoveredLink = ({ children, ...rest }: any) => {
   return (
-    <a
+    <Link
       {...rest}
       className="text-neutral-700 dark:text-neutral-200 hover:text-black"
     >
       {children}
-    </a>
+    </Link>
   );
 };
 

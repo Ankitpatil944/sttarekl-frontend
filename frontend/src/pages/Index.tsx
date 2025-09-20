@@ -295,32 +295,18 @@ return (
                 Take the first step towards your professional goals with our comprehensive assessment platform
               </p>
               <div className="flex justify-center">
-                <a
-                  href="#"
-                  className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
+                <Button
+                  variant="hero"
+                  size="xl"
+                  className="group"
                   onClick={() => {
                     console.log('Start Assessment clicked');
                     navigate('/services/ai-assessment');
                   }}
                 >
                   Begin Assessment
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2.5}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-arrow-right size-4 group-hover:translate-x-1 transition-transform duration-300"
-                    aria-hidden="true"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </a>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </Button>
               </div>
             </div>
           {/* </section> */}

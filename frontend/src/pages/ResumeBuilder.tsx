@@ -26,6 +26,7 @@ import { useState } from "react";
 import { motion } from 'framer-motion';
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/ui/navbar-menu";
+import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import './OutlinedText.css';
 
 const ResumeBuilder = () => {
@@ -133,14 +134,14 @@ const ResumeBuilder = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-bg">
+    <div className="min-h-screen bg-[#031527]">
       <Navbar />
-      <div
-        className="min-h-screen max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 
-                    m-4 sm:m-6 lg:m-10 bg-gradient-bg border border-blue-300 rounded-3xl overflow-hidden bg-gradient-to-b from-slate-100 to-cyan-50
-                    animate-fade-in mt-20"
-        style={{ marginTop: '5rem' }}
-      >
+      <div className="relative w-full animate-fade-in">
+        <motion.section
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="relative z-40 lg:min-h-screen max-w-screen-2xl mx-auto pt-16 bg-gradient-to-b from-cyan-100 to-white overflow-hidden"
+        >
         {/* Hero Section */}
         <div className="pt-20 mt-10 pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -156,11 +157,24 @@ const ResumeBuilder = () => {
               Create professional, ATS-optimized resumes that stand out to hiring managers. Get AI-powered suggestions and industry-specific templates.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg">
+              <Button 
+                size="lg"
+                onClick={() => {
+                  console.log('Start Building clicked');
+                  setActiveStep(1);
+                }}
+              >
                 Start Building
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" size="lg">
+              <Button 
+                variant="outline" 
+                size="lg"
+                onClick={() => {
+                  console.log('View Templates clicked');
+                  // Scroll to templates section
+                }}
+              >
                 View Templates
               </Button>
             </div>
@@ -334,28 +348,45 @@ const ResumeBuilder = () => {
                 Join thousands of professionals who have landed their dream jobs with our AI-powered resume builder.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg">
+                <Button 
+                  size="lg"
+                  onClick={() => {
+                    console.log('Start Building Free clicked');
+                    setActiveStep(1);
+                  }}
+                >
                   Start Building Free
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => {
+                    console.log('View All Templates clicked');
+                    // Scroll to templates section
+                  }}
+                >
                   View All Templates
                 </Button>
               </div>
             </Card>
           </div>
         </div>
-      </div>
+      </motion.section>
     </div>
 
-    <Footer />
+    {/* Footer Section */}
+    <div
+      className="-mt-16 relative z-10 min-h-screen max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-8 border border-blue-300 rounded-tl-[70px] rounded-tr-[70px] overflow-hidden bg-[#FFFFFF] animate-fade-in"
+    >
+      {/* Footer */}
+      <Footer />
 
-    <div className="px-4 sm:px-6 lg:px-8 text-center">
-      <h1
-        className="outlined-text text-[3.5rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] 2xl:text-[14rem] leading-none tracking-widest"
-      >
-        STTARKEL
-      </h1>
+      <div className="px-4 sm:px-6 lg:px-8 text-center">
+        <div className="h-[16rem] flex items-center justify-center tracking-widest">
+          <TextHoverEffect text=" AInode " />
+        </div>
+      </div>
     </div>
   </div>
   );

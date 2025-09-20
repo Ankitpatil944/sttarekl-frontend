@@ -22,6 +22,7 @@ import { useState } from "react";
 import { motion } from 'framer-motion';
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/ui/navbar-menu";
+import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import './OutlinedText.css';
 
 const JobListing = () => {
@@ -119,14 +120,14 @@ const JobListing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-bg">
+    <div className="min-h-screen bg-[#031527]">
       <Navbar />
-      <div
-        className="min-h-screen max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 
-                    m-4 sm:m-6 lg:m-10 bg-gradient-bg border border-blue-300 rounded-3xl overflow-hidden bg-gradient-to-b from-slate-100 to-cyan-50
-                    animate-fade-in mt-20"
-        style={{ marginTop: '5rem' }}
-      >
+      <div className="relative w-full animate-fade-in">
+        <motion.section
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="relative z-40 lg:min-h-screen max-w-screen-2xl mx-auto pt-16 bg-gradient-to-b from-cyan-100 to-white overflow-hidden"
+        >
         {/* Hero Section */}
         <div className="pt-20 mt-10 pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -244,14 +245,34 @@ const JobListing = () => {
                     </div>
                     
                     <div className="flex flex-col gap-2 ml-4">
-                      <Button size="sm">
+                      <Button 
+                        size="sm"
+                        onClick={() => {
+                          console.log('Apply Now clicked for job:', job.title);
+                          // In a real app, this would open application form
+                        }}
+                      >
                         Apply Now
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => {
+                          console.log('Bookmark clicked for job:', job.title);
+                          // In a real app, this would save job to bookmarks
+                        }}
+                      >
                         <Bookmark className="h-4 w-4" />
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => {
+                          console.log('Share clicked for job:', job.title);
+                          // In a real app, this would open share dialog
+                        }}
+                      >
                         <Share2 className="h-4 w-4" />
                       </Button>
                     </div>
@@ -262,7 +283,14 @@ const JobListing = () => {
 
           {/* Load More */}
           <div className="text-center mt-12">
-            <Button variant="outline" size="lg">
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => {
+                console.log('Load More Jobs clicked');
+                // In a real app, this would load more jobs
+              }}
+            >
               Load More Jobs
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -276,28 +304,45 @@ const JobListing = () => {
                 Upload your resume and let our AI match you with the perfect opportunities.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg">
+                <Button 
+                  size="lg"
+                  onClick={() => {
+                    console.log('Upload Resume clicked');
+                    // In a real app, this would open file upload dialog
+                  }}
+                >
                   Upload Resume
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => {
+                    console.log('Set Job Alerts clicked');
+                    // In a real app, this would open job alerts settings
+                  }}
+                >
                   Set Job Alerts
                 </Button>
               </div>
             </Card>
           </div>
         </div>
-      </div>
+      </motion.section>
     </div>
 
-    <Footer />
+    {/* Footer Section */}
+    <div
+      className="-mt-16 relative z-10 min-h-screen max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-8 border border-blue-300 rounded-tl-[70px] rounded-tr-[70px] overflow-hidden bg-[#FFFFFF] animate-fade-in"
+    >
+      {/* Footer */}
+      <Footer />
 
-    <div className="px-4 sm:px-6 lg:px-8 text-center">
-      <h1
-        className="outlined-text text-[3.5rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] 2xl:text-[14rem] leading-none tracking-widest"
-      >
-        STTARKEL
-      </h1>
+      <div className="px-4 sm:px-6 lg:px-8 text-center">
+        <div className="h-[16rem] flex items-center justify-center tracking-widest">
+          <TextHoverEffect text=" AInode " />
+        </div>
+      </div>
     </div>
   </div>
   );
