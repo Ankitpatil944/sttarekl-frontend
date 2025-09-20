@@ -22,7 +22,6 @@ import { useState } from "react";
 import { motion } from 'framer-motion';
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/ui/navbar-menu";
-import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import './OutlinedText.css';
 
 const JobListing = () => {
@@ -120,24 +119,12 @@ const JobListing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-bg">
+    <div className="min-h-screen bg-[#031527]">
       <Navbar />
-      <div
-        className="min-h-screen max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 
-                    m-4 sm:m-6 lg:m-10 bg-gradient-bg border border-blue-300 rounded-3xl overflow-hidden bg-gradient-to-b from-slate-100 to-cyan-50
-                    animate-fade-in mt-20"
-        style={{ marginTop: '5rem' }}
-      >
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="relative z-40 lg:min-h-screen overflow-hidden"
-        >
-          <div className="relative max-w-7xl mx-auto pt-16 lg:pt-20">
+      <div className="relative w-full animate-fade-in">
+        
         {/* Hero Section */}
-        <div className="pt-20 mt-10 pb-16">
+        <section className="relative z-40 lg:min-h-screen max-w-screen-2xl mx-auto pt-16 bg-gradient-to-b from-cyan-100 to-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="inline-flex items-center space-x-2 bg-card/50 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-primary/20">
@@ -253,34 +240,14 @@ const JobListing = () => {
                     </div>
                     
                     <div className="flex flex-col gap-2 ml-4">
-                      <Button 
-                        size="sm"
-                        onClick={() => {
-                          console.log('Apply Now clicked for job:', job.title);
-                          // In a real app, this would open application form
-                        }}
-                      >
+                      <Button size="sm">
                         Apply Now
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        onClick={() => {
-                          console.log('Bookmark clicked for job:', job.title);
-                          // In a real app, this would save job to bookmarks
-                        }}
-                      >
+                      <Button variant="outline" size="sm">
                         <Bookmark className="h-4 w-4" />
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        onClick={() => {
-                          console.log('Share clicked for job:', job.title);
-                          // In a real app, this would open share dialog
-                        }}
-                      >
+                      <Button variant="outline" size="sm">
                         <Share2 className="h-4 w-4" />
                       </Button>
                     </div>
@@ -288,71 +255,29 @@ const JobListing = () => {
                 </Card>
               ))}
           </div>
-
-          {/* Load More */}
-          <div className="text-center mt-12">
-            <Button 
-              variant="outline" 
-              size="lg"
-              onClick={() => {
-                console.log('Load More Jobs clicked');
-                // In a real app, this would load more jobs
-              }}
-            >
-              Load More Jobs
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
           </div>
+        </section>
 
-          {/* CTA Section */}
-          <div className="mt-16 text-center">
-            <Card className="p-8 bg-gradient-card border-primary/10">
-              <h3 className="text-2xl font-bold mb-3">Can't Find the Right Job?</h3>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                Upload your resume and let our AI match you with the perfect opportunities.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg"
-                  onClick={() => {
-                    console.log('Upload Resume clicked');
-                    // In a real app, this would open file upload dialog
-                  }}
-                >
-                  Upload Resume
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  onClick={() => {
-                    console.log('Set Job Alerts clicked');
-                    // In a real app, this would open job alerts settings
-                  }}
-                >
-                  Set Job Alerts
-                </Button>
-              </div>
-            </Card>
+        {/* Job Listings Section */}
+        <section className="relative w-full py-20 bg-gradient-to-b from-white to-cyan-100 overflow-hidden">
+          <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50">
+              Featured <span className="bg-gradient-primary bg-clip-text text-transparent">Jobs</span>
+            </h2>
+            
+            {/* Load More */}
+            <div className="text-center mt-12">
+              <Button variant="outline" size="lg">
+                Load More Jobs
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
           </div>
-        </div>
-      </div>
-          </div>
-        </motion.section>
-      </div>
+        </section>
 
-      {/* Footer Section */}
-      <div
-        className="-mt-16 relative z-10 min-h-screen max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-8 border border-blue-300 rounded-tl-[70px] rounded-tr-[70px] overflow-hidden bg-[#FFFFFF] animate-fade-in"
-      >
+
         {/* Footer */}
         <Footer />
-
-        <div className="px-4 sm:px-6 lg:px-8 text-center">
-          <div className="h-[16rem] flex items-center justify-center tracking-widest">
-            <TextHoverEffect text=" AInode " />
-          </div>
-        </div>
       </div>
     </div>
   );

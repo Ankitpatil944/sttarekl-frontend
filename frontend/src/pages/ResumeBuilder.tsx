@@ -26,7 +26,6 @@ import { useState } from "react";
 import { motion } from 'framer-motion';
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/ui/navbar-menu";
-import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import './OutlinedText.css';
 
 const ResumeBuilder = () => {
@@ -134,26 +133,14 @@ const ResumeBuilder = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-bg">
+    <div className="min-h-screen bg-[#031527]">
       <Navbar />
-      <div
-        className="min-h-screen max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 
-                    m-4 sm:m-6 lg:m-10 bg-gradient-bg border border-blue-300 rounded-3xl overflow-hidden bg-gradient-to-b from-slate-100 to-cyan-50
-                    animate-fade-in mt-20"
-        style={{ marginTop: '5rem' }}
-      >
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="relative z-40 lg:min-h-screen overflow-hidden"
-        >
-          <div className="relative max-w-7xl mx-auto pt-16 lg:pt-20">
+      <div className="relative w-full animate-fade-in">
+        
         {/* Hero Section */}
-        <div className="pt-20 mt-10 pb-16">
+        <section className="relative z-40 lg:min-h-screen max-w-screen-2xl mx-auto pt-16 bg-gradient-to-b from-cyan-100 to-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+            <div className="text-center mb-16">
             <div className="inline-flex items-center space-x-2 bg-card/50 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-primary/20">
               <Sparkles className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">ATS-Optimized Resumes</span>
@@ -165,43 +152,39 @@ const ResumeBuilder = () => {
               Create professional, ATS-optimized resumes that stand out to hiring managers. Get AI-powered suggestions and industry-specific templates.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg"
-                onClick={() => {
-                  console.log('Start Building clicked');
-                  setActiveStep(1);
-                }}
-              >
+              <Button size="lg">
                 Start Building
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={() => {
-                  console.log('View Templates clicked');
-                  // Scroll to templates section
-                }}
-              >
+              <Button variant="outline" size="lg">
                 View Templates
               </Button>
             </div>
           </div>
-
-          {/* Features */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {features.map((feature) => (
-              <Card key={feature.title} className="p-6 text-center border-primary/10">
-                <feature.icon className="h-12 w-12 mx-auto mb-4 text-primary" />
-                <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm">{feature.description}</p>
-              </Card>
-            ))}
           </div>
+        </section>
 
-          {/* Templates */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-12">Professional Templates</h2>
+        {/* Features Section */}
+        <section className="relative w-full py-20 bg-gradient-to-b from-white to-cyan-100 overflow-hidden">
+          <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {features.map((feature) => (
+                <Card key={feature.title} className="p-6 text-center border-primary/10">
+                  <feature.icon className="h-12 w-12 mx-auto mb-4 text-primary" />
+                  <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
+                  <p className="text-muted-foreground text-sm">{feature.description}</p>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Templates Section */}
+        <section className="relative w-full py-20 bg-gradient-to-b from-cyan-100 to-white overflow-hidden">
+          <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50">
+              Professional <span className="bg-gradient-primary bg-clip-text text-transparent">Templates</span>
+            </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {templates.map((template) => (
                 <Card key={template.id} className="overflow-hidden hover:shadow-lg transition-shadow border-primary/10 group cursor-pointer">
@@ -224,10 +207,14 @@ const ResumeBuilder = () => {
               ))}
             </div>
           </div>
+        </section>
 
-          {/* How It Works */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+        {/* How It Works Section */}
+        <section className="relative w-full py-20 bg-gradient-to-b from-white to-cyan-100 overflow-hidden">
+          <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50">
+              How It <span className="bg-gradient-primary bg-clip-text text-transparent">Works</span>
+            </h2>
             <div className="grid md:grid-cols-4 gap-8">
               {steps.map((step) => (
                 <Card key={step.number} className="p-6 text-center border-primary/10">
@@ -240,10 +227,14 @@ const ResumeBuilder = () => {
               ))}
             </div>
           </div>
+        </section>
 
-          {/* Resume Builder Interface */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-12">Start Building Your Resume</h2>
+        {/* Resume Builder Interface Section */}
+        <section className="relative w-full py-20 bg-gradient-to-b from-cyan-100 to-white overflow-hidden">
+          <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50">
+              Start Building Your <span className="bg-gradient-primary bg-clip-text text-transparent">Resume</span>
+            </h2>
             <div className="grid lg:grid-cols-2 gap-8">
               {/* Form */}
               <Card className="p-6 border-primary/10">
@@ -321,9 +312,14 @@ const ResumeBuilder = () => {
             </div>
           </div>
 
-          {/* Testimonials */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-12">Success Stories</h2>
+        </section>
+
+        {/* Testimonials Section */}
+        <section className="relative w-full py-20 bg-gradient-to-b from-white to-cyan-100 overflow-hidden">
+          <div className="text-center pt-14 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50">
+              Success <span className="bg-gradient-primary bg-clip-text text-transparent">Stories</span>
+            </h2>
             <div className="grid md:grid-cols-3 gap-6">
               {testimonials.map((testimonial, index) => (
                 <Card key={index} className="p-6 border-primary/10">
@@ -347,59 +343,13 @@ const ResumeBuilder = () => {
               ))}
             </div>
           </div>
+        </section>
 
-          {/* CTA Section */}
-          <div className="text-center">
-            <Card className="p-8 bg-gradient-card border-primary/10">
-              <h3 className="text-2xl font-bold mb-3">Ready to Create Your Professional Resume?</h3>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                Join thousands of professionals who have landed their dream jobs with our AI-powered resume builder.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg"
-                  onClick={() => {
-                    console.log('Start Building Free clicked');
-                    setActiveStep(1);
-                  }}
-                >
-                  Start Building Free
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  onClick={() => {
-                    console.log('View All Templates clicked');
-                    // Scroll to templates section
-                  }}
-                >
-                  View All Templates
-                </Button>
-              </div>
-            </Card>
-          </div>
-        </div>
-
-          </div>
-        </motion.section>
-      </div>
-
-      {/* Footer Section */}
-      <div
-        className="-mt-16 relative z-10 min-h-screen max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-8 border border-blue-300 rounded-tl-[70px] rounded-tr-[70px] overflow-hidden bg-[#FFFFFF] animate-fade-in"
-      >
         {/* Footer */}
         <Footer />
-
-        <div className="px-4 sm:px-6 lg:px-8 text-center">
-          <div className="h-[16rem] flex items-center justify-center tracking-widest">
-            <TextHoverEffect text=" AInode " />
-          </div>
-        </div>
       </div>
     </div>
   );
 };
 
-export default ResumeBuilder; 
+export default ResumeBuilder;                                                                                                               
