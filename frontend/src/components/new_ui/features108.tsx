@@ -28,8 +28,8 @@ interface Feature108Props {
 }
 
 const Feature108 = ({
-  badge = "AIspire.com",
-  heading = "Boost your focus, streamline your learning, and turn curiosity into momentum.",
+  badge = "",
+  heading = "Turn your Career Confusion into Clarity With proven Assessments, expert Mentorship and Guidance to Land Your Dream Job.",
   description = "Join us to build yourself",
   tabs = [],
 }: Feature108Props) => {
@@ -173,7 +173,7 @@ export { Feature108 };
 
 // const Feature108 = ({
 //   badge = "AIspire.com",
-//   heading = "Boost your focus, streamline your learning, and turn curiosity into momentum.",
+//   heading = "Turn your Career Confusion into Clarity—With proven Assessments, expert Mentorship and Guidance to Land Your Dream Job.",
 //   description = "Join us to build yourself",
 //   tabs = [],
 // }: Feature108Props) => {
@@ -312,7 +312,7 @@ export { Feature108 };
 
 // const Feature108 = ({
 //   badge = "AIspire.com",
-//   heading = "Boost your focus, streamline your learning, and turn curiosity into momentum.",
+//   heading = "Turn your Career Confusion into Clarity—With proven Assessments, expert Mentorship and Guidance to Land Your Dream Job.",
 //   description = "Join us to build yourself",
 //   tabs = [],
 // }: Feature108Props) => {
@@ -431,7 +431,7 @@ export { Feature108 };
 
 // const Feature108 = ({
 //   badge = "AIspire.com",
-//   heading = "Boost your focus, streamline your learning, and turn curiosity into momentum.",
+//   heading = "Turn your Career Confusion into Clarity—With proven Assessments, expert Mentorship and Guidance to Land Your Dream Job.",
 //   description = "Join us to build yourself",
 //   tabs = [],
 // }: Feature108Props) => {

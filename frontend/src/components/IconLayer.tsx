@@ -172,7 +172,6 @@ const IconLayer: React.FC = () => {
           className="w-fit mx-auto mb-6 lg:mx-0 bg-gradient-to-r from-slate-50 to-slate-100 text-[#2D3253]"
           >
             {/* Trusted by 100+ businesses */}
-            Professional Assessment Platform
           </Badge>
 
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-normal mb-6 leading-tight text-[#2D3253]">
@@ -186,7 +185,7 @@ const IconLayer: React.FC = () => {
             Career
           </h1>
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            Take the next step in your career with AIspire
+            Take the next step in your career with AInode
           </p>
 
           <div className="flex gap-4 justify-center relative mb-24 lg:mb-0">
@@ -194,10 +193,10 @@ const IconLayer: React.FC = () => {
               href="#"
               className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900"
               onClick={() => {
-                console.log("Start Assessment clicked");
+                console.log("Get Started clicked");
               }}
             >
-              Start Assessment
+              Get Started
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={24}
@@ -424,10 +423,10 @@ export default IconLayer;
 //                 href="#"
 //                 className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900"
 //                 onClick={() => {
-//                   console.log("Start Assessment clicked");
+//                   console.log("Get Started clicked");
 //                 }}
 //               >
-//                 Start Assessment
+//                 Get Started
 //                 <svg
 //                   xmlns="http://www.w3.org/2000/svg"
 //                   width={24}
@@ -644,7 +643,7 @@ export default IconLayer;
 //               className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors cursor-pointer hover:scale-105"
 //               onClick={() => navigate("/services/ai-assessment")}
 //             >
-//               Start Assessment
+//               Get Started
 //               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
 //             </div> */}
 //             <div>
@@ -652,11 +651,11 @@ export default IconLayer;
 //                 href="#"
 //                 className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
 //                 onClick={() => {
-//                   console.log('Start Assessment clicked');
+//                   console.log('Get Started clicked');
 //                   // navigate('/services/ai-assessment');
 //                 }}
 //               >
-//                 Start Assessment
+//                 Get Started
 //                 <svg
 //                   xmlns="http://www.w3.org/2000/svg"
 //                   width={24}

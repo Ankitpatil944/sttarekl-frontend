@@ -2,8 +2,8 @@ import { Layout, Pointer, Zap } from "lucide-react";
 import { Feature108 } from "@/components/new_ui/features108";
 
 const demoData = {
-  badge: "AIspire.com",
-  heading: "Boost your focus, streamline your learning, and turn curiosity into momentum.",
+  badge: "",
+  heading: "Turn your Career Confusion into Clarity With proven Assessments, expert Mentorship and Guidance to Land Your Dream Job.",
   description: "Join us to build yourself",
   tabs: [
       {

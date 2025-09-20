@@ -57,8 +57,7 @@ export function FeaturesDemo() {
     <FeatureSteps
       features={mappedFeatures}
     //   title="All-in-One Career Platform"
-      title="Accelerate your skills with
-"
+      title="Resume Builder"
       autoPlayInterval={4000}
     //   imageHeight="h-[500px]"
     />

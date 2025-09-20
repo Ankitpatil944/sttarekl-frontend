@@ -154,11 +154,11 @@ return (
                   href="#"
                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
                   onClick={() => {
-                    console.log('Start Assessment clicked');
+                    console.log('Get Started clicked');
                     navigate('/services/ai-assessment');
                   }}
                 >
-                  Start Assessment
+                  Get Started
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={24}
@@ -216,8 +216,7 @@ return (
             viewport={{ once: true }}
             className="text-xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50"
           >
-            Boost your focus, streamline your learning, and turn curiosity into
-            momentum.
+            Finding interviews stressful or unsure how to answer questions?
           </motion.h1>
 
           <div className="relative flex justify-center items-center w-full h-auto mt-8 px-4">
@@ -250,6 +249,18 @@ return (
                 object-cover object-center
               "
             />
+          </div>
+          
+          {/* Start Demo Button */}
+          <div className="flex justify-center mt-8">
+            <Button 
+              size="lg" 
+              onClick={() => navigate('/services/ai-assessment')}
+              className="px-8 py-3 text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900"
+            >
+              Start Demo
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </motion.section>
@@ -293,37 +304,113 @@ return (
         
       </motion.section>
 
-      {/* Section 5 */}
-      <section style={{ scrollBehavior: "smooth", transition: "all 0.5s ease-in-out" }}
-        className="-mt-16 relative z-20  max-w-screen-2xl mx-auto bg-[#FFFFFF] lg:rounded-tl-[70px] lg:rounded-tr-[70px] sm:rounded-tl-[50px] sm:rounded-tr-[50px] rounded-tl-[40px] rounded-tr-[40px] overflow-hidden"
-      >
-        {/* <div className="flex sm:mt-10 sm:mb-14 lg:mt-32 m-6 sm:m-14 lg:m-24 justify-center items-center h-full"> */}
-        <div className="sm:mt-10 sm:mb-14 lg:mt-32 m-6 sm:m-14 lg:ml-24 lg:mr-24 justify-center items-center pt-1 relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1">
-          <motion.h6
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-            className="sm:text-2xl lg:text-4xl  font-bold text-black leading-loose sm:leading-relaxed lg:leading-normal"
-          >
-            <span className="text-[#F6F6F6] bg-[#000000] border-2 border-[#5247C8] rounded-[70px] pb-2 pl-4 pr-4">AIspire</span> is an intelligent, AI-driven platform that is designed to empower the  
-            <span className="border-2 border-[#333233b5] rounded-[70px] pb-1 pl-4 pr-4 animate-fade-in duration-1000 hover:text-[#0b54dc]">students</span> from all backgrounds, 
-            <span className="border-2 border-[#333233b5] rounded-[70px] pb-1 pl-4 pr-4 animate-fade-in duration-1000 hover:text-[#0b54dc]">universities</span>and <br />
-            <span className="border-2 border-[#333233b5] rounded-[70px] pb-1 pl-4 pr-4 animate-fade-in duration-1000 hover:text-[#0b54dc]">recruiters</span> by bridging the gap between education and employability. The platform provides end-to-end support for students, from building strong resumes to preparing for interviews and getting hired with the help of AI-Powered mock Interviews and assessments.
-          </motion.h6>
-        </div>
-      </section>
 
-      {/* Testimonials Section 6 */}
+      {/* Success Stories Section */}
       <motion.section
         className="min-h max-w-screen-2xl mx-auto pb-28 bg-gradient-to-t from-[#D2FAFE] to-[#FFFFFF] overflow-hidden "
       >
         <div className="text-center relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mt-12">
-              <Testimonials />
-            </div>
-        </div>
+          <div className="mt-12">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-[#2D3253]"
+            >
+              SUCCESS STORIES
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-xl text-muted-foreground mb-12"
+            >
+              What our users say:
+            </motion.p>
+            
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+                viewport={{ once: true }}
+                className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-primary font-bold text-lg">AR</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-lg">Aarav Sharma</h4>
+                    <p className="text-muted-foreground text-sm">Software Engineer, Bengaluru</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 italic">
+                  "The AI assessments felt practical and the feedback was specific. I landed two interviews in a week after using the platform."
+                </p>
+                <div className="flex mt-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+              </motion.div>
 
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                viewport={{ once: true }}
+                className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-primary font-bold text-lg">MR</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-lg">Meera Reddy</h4>
+                    <p className="text-muted-foreground text-sm">Data Analyst, Pune</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 italic">
+                  "Loved the AI interview practice. It highlighted how I speak under pressure and what to fix before the real thing."
+                </p>
+                <div className="flex mt-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+                viewport={{ once: true }}
+                className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-primary font-bold text-lg">KT</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-lg">Karthik Thakur</h4>
+                    <p className="text-muted-foreground text-sm">Full-stack Developer, Chennai</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 italic">
+                  "No fluff. Clear steps, clean UI, and helpful insights. It kept me focused on what matters for my career growth."
+                </p>
+                <div className="flex mt-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
       </motion.section>
 
     </div>
@@ -534,11 +621,11 @@ export default Index;
 //                   href="#"
 //                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
 //                   onClick={() => {
-//                     console.log('Start Assessment clicked');
+//                     console.log('Get Started clicked');
 //                     navigate('/services/ai-assessment');
 //                   }}
 //                 >
-//                   Start Assessment
+//                   Get Started
 //                   <svg
 //                     xmlns="http://www.w3.org/2000/svg"
 //                     width={24}
@@ -669,7 +756,7 @@ export default Index;
 //                   href="#"
 //                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
 //                   onClick={() => {
-//                     console.log('Start Assessment clicked');
+//                     console.log('Get Started clicked');
 //                     navigate('/services/ai-assessment');
 //                   }}
 //                 >
@@ -943,11 +1030,11 @@ export default Index;
 //                   href="#"
 //                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
 //                   onClick={() => {
-//                     console.log('Start Assessment clicked');
+//                     console.log('Get Started clicked');
 //                     navigate('/services/ai-assessment');
 //                   }}
 //                 >
-//                   Start Assessment
+//                   Get Started
 //                   <svg
 //                     xmlns="http://www.w3.org/2000/svg"
 //                     width={24}
@@ -1095,7 +1182,7 @@ export default Index;
 //                   href="#"
 //                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
 //                   onClick={() => {
-//                     console.log('Start Assessment clicked');
+//                     console.log('Get Started clicked');
 //                     navigate('/services/ai-assessment');
 //                   }}
 //                 >
@@ -1484,7 +1571,7 @@ export default Index;
 //                 className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors cursor-pointer hover:scale-105"
 //                 onClick={() => navigate("/services/ai-assessment")}
 //               >
-//                 Start Assessment
+//                 Get Started
 //                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
 //               </div> */}
 //               <div>
@@ -1492,11 +1579,11 @@ export default Index;
 //                   href="#"
 //                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 pl-6 pr-6 text-xs lg:text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
 //                   onClick={() => {
-//                     console.log('Start Assessment clicked');
+//                     console.log('Get Started clicked');
 //                     navigate('/services/ai-assessment');
 //                   }}
 //                 >
-//                   Start Assessment
+//                   Get Started
 //                   <svg
 //                     xmlns="http://www.w3.org/2000/svg"
 //                     width={24}
@@ -1634,7 +1721,7 @@ export default Index;
 //                   href="#"
 //                   className="text-white cursor-pointer group justify-center flex items-center gap-3 px-8 py-3 text-lg rounded-2xl bg-gradient-to-r from-gray-800 to-gray-600 border-2 border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-800 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-500 hover:border-gray-900" 
 //                   onClick={() => {
-//                     console.log('Start Assessment clicked');
+//                     console.log('Get Started clicked');
 //                     navigate('/services/ai-assessment');
 //                   }}
 //                 >

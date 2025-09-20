@@ -131,7 +131,7 @@ const About = () => {
             >
               <div className="inline-flex items-center space-x-2 bg-card/50 backdrop-blur-sm rounded-full px-4 py-2 mb-8 border border-primary/20 animate-fade-in">
                 <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                <span className="text-sm font-medium">Our Story & Mission</span>
+                <span className="text-sm font-medium">From Career Confusion to Career Confidence</span>
               </div>
               
               <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-normal mb-6 leading-tight animate-fade-in text-[#2D3253]">

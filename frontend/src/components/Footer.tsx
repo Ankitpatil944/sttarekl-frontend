@@ -49,9 +49,6 @@ const Footer = () => {
               <img src="/logos/AIspire_logo5.jpg" alt="Sttarkel Logo" className="h-10 w-auto" />
             </div>
             <div className="space-y-4">
-              <Button className="w-full bg-black text-white hover:bg-gray-800">
-                Try Now
-              </Button>
               <div className="text-sm space-y-1">
                 <div>+91 93800 53089</div>
                 <div>info@sttarkel.com</div>

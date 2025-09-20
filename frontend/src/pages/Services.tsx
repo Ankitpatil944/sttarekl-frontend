@@ -73,7 +73,7 @@ const Services = () => {
         "Industry benchmarking",
         "Progress tracking"
       ],
-      cta: "Start Assessment",
+      cta: "Get Started",
       path: "/services/ai-assessment",
       color: "from-purple-500/10 to-purple-600/10",
       popular: true
@@ -111,12 +111,12 @@ const Services = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="relative z-40 lg:min-h-screen max-w-screen-2xl mx-auto flex items-center bg-gradient-to-b from-cyan-100 to-white overflow-hidden"
+          className="relative z-40 lg:min-h-screen max-w-screen-2xl mx-auto pt-16 bg-gradient-to-b from-cyan-100 to-white overflow-hidden"
         >
-          <div className="relative max-w-7xl mx-auto w-full">
+          <div className="relative max-w-7xl mx-auto pt-16 lg:pt-20">
         
         {/* Hero Section */}
-        <section className="relative py-20">
+        <section className="relative pt-20 mt-10 pb-20">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               className="text-center max-w-4xl mx-auto"
@@ -154,7 +154,7 @@ const Services = () => {
             >
               {services.map((service, index) => (
                 <motion.div key={service.id} variants={itemVariants}>
-                  <Card className="relative p-8 bg-gradient-card border-primary/10 hover:border-primary/30 transition-all duration-300 hover:shadow-glow-accent group hover-scale animate-fade-in h-full">
+                  <Card className="relative p-8 bg-gradient-card border-primary/10 hover:border-primary/30 transition-all duration-300 hover:shadow-glow-accent group hover-scale animate-fade-in h-full flex flex-col">
                     {service.popular && (
                       <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
                         Most Popular
@@ -172,7 +172,7 @@ const Services = () => {
                       </p>
                     </div>
                     
-                    <div className="space-y-3 mb-6">
+                    <div className="space-y-3 mb-6 flex-grow">
                       {service.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start gap-3">
                           <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
@@ -181,7 +181,7 @@ const Services = () => {
                       ))}
                     </div>
                     
-                    <Link to={service.path} className="block">
+                    <Link to={service.path} className="block mt-auto">
                       <Button className="w-full group hover-scale">
                         {service.cta}
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
