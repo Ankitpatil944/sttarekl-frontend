@@ -421,6 +421,7 @@ const AIAssessment = () => {
           </div>
         </div>
       </motion.section>
+    </div>
 
     {/* Footer Section */}
     <div

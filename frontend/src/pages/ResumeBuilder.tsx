@@ -373,6 +373,7 @@ const ResumeBuilder = () => {
           </div>
         </div>
       </motion.section>
+    </div>
 
     {/* Footer Section */}
     <div
