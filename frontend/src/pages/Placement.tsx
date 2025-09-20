@@ -184,19 +184,6 @@ const Placement = () => {
             </div>
           </div>
 
-          {/* CTA */}
-          <div className="text-center">
-            <Card className="p-8 bg-gradient-card border-primary/10">
-              <h3 className="text-2xl font-bold mb-3">Ready to Get Placed?</h3>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                Join our placement program and connect with top companies through our hiring partner network.
-              </p>
-              <Button size="lg">
-                Start Placement Process
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Card>
-          </div>
         </div>
       </div>
     </div>

@@ -184,19 +184,6 @@ const CareerRoadmap = () => {
             </div>
           </div>
 
-          {/* CTA */}
-          <div className="text-center">
-            <Card className="p-8 bg-gradient-card border-primary/10">
-              <h3 className="text-2xl font-bold mb-3">Ready to Plan Your Career?</h3>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                Get a personalized career roadmap based on your skills, goals, and industry trends.
-              </p>
-              <Button size="lg">
-                Start Planning
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Card>
-          </div>
         </div>
       </div>
     </div>

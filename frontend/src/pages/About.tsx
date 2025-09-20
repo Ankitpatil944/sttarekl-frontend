@@ -442,37 +442,6 @@ const About = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div 
-              className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-3xl p-12"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Ready to Transform Your Career?
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Join thousands of professionals who have accelerated their careers with our platform. 
-                Start your journey today.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/services/ai-assessment">
-                  <Button size="lg" className="text-lg px-8 py-6 group hover-scale">
-                    Start Assessment
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                <Button variant="outline" size="lg" className="text-lg px-8 py-6 hover-scale">
-                  Learn More
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        </section>
 
           </div>
         </motion.section>

@@ -271,45 +271,6 @@ return (
             Third Section Content
           </h2> */}
           
-          {/* <section className="relative max-w-4xl mx-auto m-2 py-8"> */}
-            <div className="relative  rounded-3xl lg:p-8 md:p-12 text-center overflow-hidden ">
-
-              <div className="flex justify-center mb-8">
-                <div className="w-20 h-20 rounded-full border-2 border-blue-300 flex items-center justify-center bg-white backdrop-blur-sm shadow-lg shadow-blue-200/50">
-                  <Trophy className="h-10 w-10 text-blue-500 drop-shadow-lg" />
-                </div>
-              </div>
-              
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                viewport={{ once: true }}
-                className="text-2xl mb-6 sm:text-4xl md:text-6xl lg:text-4xl font-normal leading-tight text-[#2D3253] z-50"
-              >
-                Start your first AI‑powered assessment now!
-              </motion.h1>
-              
-
-              <p className="text-sm lg:text-xl text-slate-700 mb-10 max-w-2xl mx-auto ">
-                Take the first step towards your professional goals with our comprehensive assessment platform
-              </p>
-              <div className="flex justify-center">
-                <Button
-                  variant="hero"
-                  size="xl"
-                  className="group"
-                  onClick={() => {
-                    console.log('Start Assessment clicked');
-                    navigate('/services/ai-assessment');
-                  }}
-                >
-                  Begin Assessment
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </Button>
-              </div>
-            </div>
-          {/* </section> */}
 
         </div>
       </motion.section>
